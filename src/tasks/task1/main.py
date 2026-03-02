@@ -1,36 +1,17 @@
-from functools import reduce
-import re
-
 def main():
-    print('Input string')
-    value = input()
-    pattern = r'^\S+\.txt$'
-    content = ''
-    if (re.match(pattern, value)):
-        content = read_file(value)
-    else:
-        content = value
-        
-    result = count_words(content)
+    print('Введите массив числе через пробел')
+    a = input().split() or [1, 2, 3, 4]
+    a = list(map(lambda x: int(x), a))
+    print(a)
+    print('Введите массив числе через пробел')
+    b = input().split() or [3, 4, 5, 6]
+    b = list(map(lambda x: int(x), b))
+    print(b)
+    print(diff_lists(a, b))
 
-    print(result)
-
-def count_words(value):
-    words = value.split()
-    return reduce(
-        lambda acc, word: {**acc, word.lower(): acc.get(word.lower(), 0) + 1},
-        words,
-        {}
-    )
-
-def read_file(filepath):
-    try:
-        with open(filepath, 'r') as file:
-            return file.read()
-    except Exception as e:
-        print(f'Произошла ошибка при чтении файла: {e}')
-        return ''
-
+def diff_lists(a, b):
+    result = set(b) - set(a)
+    return list(result)
 
 if __name__ == "__main__":
     main()
